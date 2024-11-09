@@ -1,4 +1,4 @@
-from ..common_functions.read_input import read_input_file
+from common_functions.read_input import read_input_file
 
 
 def extract_numbers_from_document(calibration_document):
