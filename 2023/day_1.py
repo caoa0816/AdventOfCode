@@ -1,16 +1,30 @@
-# read doc line by line to extract all digits 
+def read_input_file(filename='day1_input.txt'):
+    input_file = f'./2023/2023_input'
+    with open (f'{input_file}/{filename}') as file:
+        contents = file.read()
+        return contents.strip().split('\n')
 
-# extract the 1st & lst digit from each line, combine these two digit & convert to int 
+def extract_numbers_from_document(calibration_document):
+    numerical_values = []
+    for content in calibration_document:
+        numerical_value_by_line = [char for char in content if char.isdigit()]
+        numerical_values.append(numerical_value_by_line)
+    return numerical_values
 
-# if len(digits) == 1, repeat it twice 
+def extract_first_and_last_digit(numerical_values: list):
+    first_and_last_digits = []
+    for digits in numerical_values:
+        relevant_digits = int(digits[0] + digits[-1])
+        first_and_last_digits.append(relevant_digits)
+    return first_and_last_digits
 
-# sum of all int 
-
-input_file = f'home/anna_cao/advent-of-code/2023/2023_input'
+def calculate_sum_of_all_digits(digits: list):
+    return sum(digits)
 
 if __name__ == "__main__":
-    with open (f"{input_file}/day1_input.txt") as file:
-        contents = file.read()
-        print(len(contents))
-    
+    input = read_input_file()
+    digits_from_doc = extract_numbers_from_document(input)
+    first_and_last_digits = extract_first_and_last_digit(digits_from_doc)
+    print(sum(first_and_last_digits))
 
+    
