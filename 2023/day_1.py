@@ -1,8 +1,5 @@
-def read_input_file(filename='day1_input.txt'):
-    input_file = f'./2023/2023_input'
-    with open (f'{input_file}/{filename}') as file:
-        contents = file.read()
-        return contents.strip().split('\n')
+from ..common_functions.read_input import read_input_file
+
 
 def extract_numbers_from_document(calibration_document):
     numerical_values = []
