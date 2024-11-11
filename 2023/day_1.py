@@ -24,31 +24,38 @@ def calculate_sum_of_all_digits(digits: list):
 
 def transform_letter_to_digit(calibration_value):
     transformed_calibration_value = ""
-
-    i = 0
-    while i < len(calibration_value):
-        for key, value in LETTER_TO_DIGIT.items():
-            if key in calibration_value[i:]: 
-                transformed_calibration_value[i] = value
-                i += len(key)
-            else:
-                transformed_calibration_value[i] = calibration_value[i]
-                
+    
+    for i in range(0, len(calibration_value)):
+        if calibration_value[i].isdigit():
+            transformed_calibration_value += calibration_value[i]
+            i += 1
+        else:
+            for j in range(i+3, i+6):
+                if calibration_value[i:j] in list(LETTER_TO_DIGIT.keys()):
+                     transformed_calibration_value += LETTER_TO_DIGIT[calibration_value[i:j]]
+                     i += len(calibration_value[i:j])
+                     j += len(calibration_value[i:j])
+            
     return transformed_calibration_value
+
 
 if __name__ == "__main__":
     calibration_document = read_input_file()
     
-    first_and_last_digit_pt1 = []
+    first_and_last_digit_pt1, first_and_last_digit_pt2 = [], []
     for content in calibration_document:
-        transformed_value = transform_letter_to_digit(content)
-        print(transformed_value)
-        
-    #     digits_from_doc_pt1 = extract_numbers_from_document(content)
-    #     relevant_digits_pt1 = extract_first_and_last_digit(digits_from_doc_pt1)
-    #     first_and_last_digit_pt1.append(relevant_digits_pt1)
+        digits_from_doc_pt1 = extract_numbers_from_document(content)
+        relevant_digits_pt1 = extract_first_and_last_digit(digits_from_doc_pt1)
+        first_and_last_digit_pt1.append(relevant_digits_pt1)
+
+        converted_value = transform_letter_to_digit(content)
+        relevant_digits_pt2 = extract_first_and_last_digit(converted_value)
+        first_and_last_digit_pt2.append(relevant_digits_pt2)
+
+    print(calculate_sum_of_all_digits(first_and_last_digit_pt1))
+    print(calculate_sum_of_all_digits(first_and_last_digit_pt2))
     
-    # print(calculate_sum_of_all_digits(first_and_last_digit_pt1))
     
-    
-    
+
+    # txt = "jdklghtbz1eightrhvfmnlknlghg77"
+    # print(transform_letter_to_digit(txt))
