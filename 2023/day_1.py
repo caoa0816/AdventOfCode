@@ -57,5 +57,3 @@ if __name__ == "__main__":
     
     
 
-    # txt = "jdklghtbz1eightrhvfmnlknlghg77"
-    # print(transform_letter_to_digit(txt))
